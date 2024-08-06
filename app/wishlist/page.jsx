@@ -6,8 +6,10 @@ import Image from "next/image";
 import Home from '@/public/ProductsSection/home.svg';
 import Arrow from '@/public/ProductsSection/right_arrow.svg';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Button } from "@mui/material";
 
 const Wishlist = () => {
   const [data, setData] = useState([]);
@@ -25,37 +27,20 @@ const Wishlist = () => {
       console.log(error);
     }
   };
-
-  const toggleLike = async (id) => {
+  const handleLike = async (productId) => {
     try {
-      const product = data.find(product => product.product_id === id);
-      if (product.liked) {
-       
-        const response = await Like.unLike(id);
-        if (response.data) {
-          setData((prevData) =>
-            prevData.filter((product) => product.product_id !== id)
-          );
-          toast.success("Понравившийся товар удален в список желаний");
-        } else {
-          console.error("Error processing unlike action");
-        }
-      } else {
-        const response = await Like.like(id); 
-        if (response.data) {
-          setData((prevData) =>
-            prevData.map((product) =>
-              product.product_id === id ? { ...product, liked: true } : product
-            )
-          );
-          toast.success("Product added to wishlist");
-        } else {
-          console.error("Error processing like action");
-        }
+      const response = await Like.postLike(productId);
+      if (response) {
+        const productsWithLikeState = data.map((product) =>
+          product.product_id === productId
+            ? { ...product, liked: !product.liked }
+            : product
+        );
+        setData(productsWithLikeState);
       }
+      window.location.reload()
     } catch (error) {
-      console.error("Error liking/unliking product:", error);
-      toast.error("Error liking/unliking product");
+      console.error('Error liking the product:', error);
     }
   };
 
@@ -82,12 +67,28 @@ const Wishlist = () => {
           {data.map((product) => (
             <div key={product.product_id} className="relative m-4">
               <div className="w-[300px] h-[350px] bg-white flex flex-col items-center justify-between relative shadow-md">
-                <div
-                  className="absolute right-[20px] top-[20px] cursor-pointer"
-                  onClick={() => toggleLike(product.product_id)}
-                >
-                  <FavoriteBorderIcon className="text-red-500" />
-                </div>
+              <div className="absolute ml-[270px]">
+              <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleLike(product.product_id);
+              }}
+              className="  p-1"
+              style={{
+                minWidth: "unset",
+                padding: "0",
+                color: product.liked ? "red" : "white",
+                borderRadius: "50%",
+                backgroundColor: "rgba(255, 255, 255, 0.7)",
+              }}
+            >
+              {product.liked ? (
+                <FavoriteIcon style={{ color: "red", fontSize: 24 }} />
+              ) : (
+                <FavoriteBorderIcon style={{ color: "black", fontSize: 24 }} />
+              )}
+            </Button>
+              </div>
                 <div className="w-[200px] h-[194px] grid justify-center items-center z-[999]">
                   <img
                     src={product.image_url[0]}

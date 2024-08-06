@@ -62,6 +62,7 @@ const Index = () => {
       toast.error("Error updating wishlist");
     }
   };
+  
 
   const handleBasket = async (id) => {
     try {
