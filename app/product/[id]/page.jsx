@@ -12,6 +12,7 @@ import avatar from "@/public/proucts/avatar.png";
 import Home from '@/public/ProductsSection/home.svg';
 import Arrow from '@/public/ProductsSection/right_arrow.svg';
 import sliders from '@/public/proucts/sliders.png'
+import { Button } from "@mui/material";
 
 const SingleProductPage = () => {
   const [product, setProduct] = useState(null);
@@ -151,14 +152,13 @@ const SingleProductPage = () => {
           <p className="mt-2 text-gray-700">Страна производитель: {made_in}</p>
           <p className="mt-4 text-2xl font-bold">{cost} UZS / 1 шт.</p>
           <div className="flex gap-4 mt-4">
-            <Link
-              href="/basket"
+            <Button
               className="flex items-center gap-[4px] px-4 py-2 bg-[#FBD029] text-black rounded-md"
               onClick={() => handleBasket(product.product_id)}
             >
               <Image src={cart} alt="cart" />
               Корзина
-            </Link>
+            </Button>
             <button className="flex items-center gap-[4px] px-4 py-2 border-2 border-[#FBD029] text-[#FBD029] rounded-md">
               <Image src={sliders} alt="slider" />
               Сравнить

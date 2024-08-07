@@ -80,6 +80,11 @@ const Index = () => {
     getData();
   }, []);
 
+  const deleteAllCards =() => {
+    setProducts([])
+    localStorage.removeItem("carProducts")
+  }
+
   const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -118,7 +123,7 @@ const Index = () => {
             <div className="w-full max-w-full sm:max-w-md lg:max-w-[600px] bg-white rounded-lg shadow-md p-4">
               <div className="flex justify-between items-center pb-4">
                 <h1 className="text-lg sm:text-[24px] font-bold">Ваша корзина</h1>
-                <button onClick={() => setProducts([])} className="text-red-500 text-sm font-medium sm:text-[16px] sm:font-medium">
+                <button onClick={deleteAllCards} className="text-red-500 text-sm font-medium sm:text-[16px] sm:font-medium">
                   Очистить все
                 </button>
               </div>
