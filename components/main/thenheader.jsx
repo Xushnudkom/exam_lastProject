@@ -6,7 +6,7 @@ import IconSearch from '@/public/mainimg/icon_search.svg'
 import IconUser from '@/public/mainimg/icon_user.svg'
 import IconLike from '@/public/mainimg/icon_like.svg'
 import IconShopping from '@/public/mainimg/icon_shopping.svg'
-import SettingsVoiceIcon from '@/public/mainimg/voice.png';
+import SettingsVoiceIcon from '@/public/mainimg/Voice.png';
 import Modal from "@/app/sign-in/page";
 import Link from "next/link";
 const Index = () => {
