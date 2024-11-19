@@ -6,6 +6,7 @@ import IconSearch from '@/public/mainimg/icon_search.svg'
 import IconUser from '@/public/mainimg/icon_user.svg'
 import IconLike from '@/public/mainimg/icon_like.svg'
 import IconShopping from '@/public/mainimg/icon_shopping.svg'
+import SettingsVoiceIcon from '@/public/mainimg/voice.png';
 import Modal from "@/app/sign-in/page";
 import Link from "next/link";
 const Index = () => {
@@ -46,6 +47,11 @@ const Index = () => {
       </div>
 
       <div className="flex justify-between items-center lg:flex gap-3">
+      
+        
+          <Link href="https://www.speechtexter.com/" target="_blank" className="bg-[#F2F2F2] items-center p-4 rounded-md hover:bg-[#FBD029] transition-all">
+          <Image src={SettingsVoiceIcon} alt="voice" width={24} height={24}/>
+          </Link>
         <button onClick={handleOpen} className="bg-[#F2F2F2] p-4 rounded-md hover:bg-[#FBD029] transition-all">
           <Image src={IconUser} alt="user"/>
         </button>
